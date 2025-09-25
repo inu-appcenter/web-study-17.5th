@@ -1,22 +1,24 @@
 /* 전체 페이지 중앙 정렬 */
 body {
   display: flex;
-  justify-content: center; /* 가로 가운데 */
-  align-items: center;     /* 세로 가운데 */
-  height: 100vh;           /* 화면 전체 높이 */
-  margin: 0;               /* 기본 여백 제거 */
-  background: #f5f5f5;     /* 배경색 (선택사항) */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: #f5f5f5;
 }
 
+/* 명함 박스 */
 .card {
   width: 500px;
+  background: #fff;
   border: 1px solid #ccc;
+  border-radius: 8px;
   padding: 20px;
   display: flex;
-  flex-direction: column; /* 위에서 아래로 */
+  flex-direction: column;
   gap: 12px;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 살짝 그림자 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* 로고 오른쪽 정렬 */
@@ -24,21 +26,51 @@ body {
   text-align: right;
 }
 
-/* 하단 좌우 분할 */
-.footer {
+.logo h1 {
+  margin: 0;
+}
+
+.logo p {
+  margin: 0;
+  font-size: 12px;
+  color: #555;
+}
+
+/* 직책 */
+.position {
+  font-size: 14px;
+  color: #444;
+}
+
+/* 이름 크게 */
+.name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* 주소 */
+.address {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 연락처 */
+.contacts {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .contact-item {
-  display: flex;          /* 아이콘 + 텍스트 가로 배치 */
-  align-items: center;    /* 세로 가운데 정렬 */
-  gap: 8px;               /* 아이콘과 텍스트 사이 간격 */
-  margin: 4px 0;          /* 위아래 여백 */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #333;
 }
 
 .icon {
-  width: 16px;            /* 아이콘 크기 줄이기 */
+  width: 16px;
   height: 16px;
 }
