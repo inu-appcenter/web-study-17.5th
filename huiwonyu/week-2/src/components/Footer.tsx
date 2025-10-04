@@ -1,5 +1,38 @@
+import { useEffect, useState } from "react";
+
 const Footer = () => {
-    return <div>Footer</div>
+    const [remaining, setRemaining] = useState(0);
+
+    // 남은 할 일 개수 계산
+    const calculateRemaining = () => {
+        const todos = JSON.parse(localStorage.getItem("todos") || "[]");
+        const count = todos.filter((item: any) => !item.isDone).length;
+        setRemaining(count);
+    };
+
+    useEffect(() => {
+        calculateRemaining();
+    }, []);
+
+    // 완료 항목 삭제
+    const handleClearCompleted = () => {
+        const todos = JSON.parse(localStorage.getItem("todos") || "[]");
+        const newTodos = todos.filter((item: any) => !item.isDone); // 완료된 것 제외
+        localStorage.setItem("todos", JSON.stringify(newTodos));
+        calculateRemaining(); // 남은 개수 다시 계산
+    };
+
+    return (
+        <div className="flex justify-between items-center border-t border-gray-200 my-8 pt-8">
+            <span className="text-gray-700">할 일이 {remaining}개 남았습니다!</span>
+            <button
+                onClick={handleClearCompleted}
+                className="bg-gray-300 text-black/60 px-3 py-1 rounded-md hover:bg-gray-400 transition"
+            >
+                완료 목록 삭제
+            </button>
+        </div>
+    );
 };
 
 export default Footer;
