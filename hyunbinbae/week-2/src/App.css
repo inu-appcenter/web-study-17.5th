@@ -1,0 +1,8 @@
+.App {
+  width: 500px;
+  margin: 70px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-color: #d3c1a5;
+}
