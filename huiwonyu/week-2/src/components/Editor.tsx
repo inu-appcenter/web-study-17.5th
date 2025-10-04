@@ -14,6 +14,8 @@ const Editor = () => {
 
         // 다시 저장 (문자열로 변환해서)
         localStorage.setItem("todos", JSON.stringify(newItems));
+
+        setInputValue("");
     };
 
 
@@ -26,16 +28,21 @@ const Editor = () => {
                 type="text"
                 placeholder="할 일을 입력하세요"
                 className="flex-1 rounded-md px-4 py-4 text-gray-700 
-             border border-transparent
-             hover:border-[#7A83DE] focus:border-[#7A83DE]
-             focus:ring-2 focus:ring-[#7A83DE] 
-             focus:outline-none
-             transform hover:scale-[1.02] focus:scale-[1.02]
-             transition-all duration-200"
+                            border border-transparent
+                            hover:border-[#7A83DE] focus:border-[#7A83DE]
+                            focus:ring-2 focus:ring-[#7A83DE] 
+                            focus:outline-none
+                            transform hover:scale-[1.02] focus:scale-[1.02]
+                            transition-all duration-200"
             />
             <button
-                className="bg-[#7A83DE] text-white rounded-xl px-4 py-2 
-             transform hover:scale-105 transition-transform duration-200" onClick={handleAddButton}>
+                className="bg-[#7A83DE]/80
+                text-white 
+                rounded-xl 
+                px-4 py-2 
+             transform hover:scale-105 
+             transition-transform duration-200"
+                onClick={handleAddButton}>
                 + 추가
             </button>
         </div>
