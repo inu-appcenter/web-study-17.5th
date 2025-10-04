@@ -15,7 +15,16 @@ export default function App() {
           <Info>🎓 INU, information and communication engineering</Info>
           <Info>💻 Appcenter 17.5th Web part</Info>
           <Info>📧 bhb684@gmail.com</Info>
-          <Info>👨‍💻 https://github.com/boragu</Info>
+          <Info>
+            👨‍💻
+            <a
+              href="https://github.com/boragu"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://github.com/boragu
+            </a>
+          </Info>
         </SecondArea>
       </Card>
     </Container>
@@ -33,7 +42,7 @@ const Container = styled.div`
 
 const Card = styled.div`
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; flex 디폴트는 row*/
   background: #111;
   border-radius: 20px;
   padding: 40px;
@@ -44,6 +53,7 @@ const Card = styled.div`
   &:hover {
     transform: translateY(-8px);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease; // 부드러운 애니메이션 효과
   }
   // 이건 그냥 찾아보면서.. 그림자는 gpt가 검정색으로
 `;
@@ -62,7 +72,7 @@ const ProfileImg = styled.img`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  margin-top: 35px;
+  margin-top: 32px; //보통 4나 8배수
   margin-bottom: 10px;
   border: 3px solid #42322c;
 `;
