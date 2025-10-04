@@ -18,8 +18,6 @@ const Editor = () => {
         setInputValue("");
     };
 
-
-
     return (
         <div className="flex items-center gap-2 border-b border-gray-200 py-2 mb-8">
             <input
