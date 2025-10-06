@@ -3,15 +3,22 @@ import { useEffect, useState } from "react";
 const Footer = () => {
     const [remaining, setRemaining] = useState(0);
 
-    // 남은 할 일 개수 계산
-    const calculateRemaining = () => {
-        const todos = JSON.parse(localStorage.getItem("todos") || "[]");
-        const count = todos.filter((item: any) => !item.isDone).length;
-        setRemaining(count);
-    };
-
     useEffect(() => {
+        const calculateRemaining = () => {
+            const todos = JSON.parse(localStorage.getItem("todos") || "[]");
+            const count = todos.filter((item: any) => !item.isDone).length;
+            setRemaining(count);
+        };
+
         calculateRemaining();
+        window.addEventListener("storage", calculateRemaining);
+
+        const interval = setInterval(calculateRemaining, 500);
+
+        return () => {
+            window.removeEventListener("storage", calculateRemaining);
+            clearInterval(interval);
+        };
     }, []);
 
     // 완료 항목 삭제
@@ -19,7 +26,7 @@ const Footer = () => {
         const todos = JSON.parse(localStorage.getItem("todos") || "[]");
         const newTodos = todos.filter((item: any) => !item.isDone); // 완료된 것 제외
         localStorage.setItem("todos", JSON.stringify(newTodos));
-        calculateRemaining(); // 남은 개수 다시 계산
+        window.dispatchEvent(new Event("storage"));
     };
 
     return (

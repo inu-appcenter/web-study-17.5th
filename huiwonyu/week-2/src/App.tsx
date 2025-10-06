@@ -7,7 +7,7 @@ import Footer from './components/Footer.tsx'
 
 function App() {
   return (
-    <div className="p-4 mx-auto max-w-2xl border border-gray-300 rounded-xl my-12">
+    <div className="p-4 mx-auto max-w-2xl border border-gray-300 rounded-xl my-12 shadow-lg">
       <header className="mb-4">
         <Header />
       </header>

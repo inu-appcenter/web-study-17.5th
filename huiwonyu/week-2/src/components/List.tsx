@@ -5,10 +5,19 @@ import type { TodoItemProps } from "../types/todo";
 const List = () => {
     const [todoItems, setTodoItems] = useState<TodoItemProps[]>([]);
 
-    // 처음 마운트될 때 localStorage에서 불러오기
-    useEffect(() => {
+    const loadTodos = () => {
         const oldItems = JSON.parse(localStorage.getItem("todos") || "[]");
         setTodoItems(oldItems);
+    };
+
+    useEffect(() => {
+        loadTodos();
+
+        window.addEventListener("storage", loadTodos);
+
+        return () => {
+            window.removeEventListener("storage", loadTodos);
+        };
     }, [todoItems]);
 
     // 삭제
@@ -16,6 +25,7 @@ const List = () => {
         const newItems = todoItems.filter((_, i) => i !== index);
         setTodoItems(newItems);
         localStorage.setItem("todos", JSON.stringify(newItems));
+        loadTodos();
     };
 
     // 수정
@@ -24,14 +34,16 @@ const List = () => {
         newItems[index].title = newTitle;
         setTodoItems(newItems);
         localStorage.setItem("todos", JSON.stringify(newItems));
+        loadTodos();
     };
 
-    // 체크박스
+    // 체크박스 토글
     const handleToggle = (index: number) => {
         const newItems = [...todoItems];
         newItems[index].isDone = !newItems[index].isDone;
         setTodoItems(newItems);
         localStorage.setItem("todos", JSON.stringify(newItems));
+        loadTodos();
     };
 
     return (
