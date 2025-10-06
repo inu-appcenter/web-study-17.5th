@@ -1,0 +1,10 @@
+.card-text{
+    background-color: #1F1F1F;
+    width: auto;
+    text-align: left;
+}
+
+.completed{
+    text-decoration: line-through;
+    font-style: italic;
+}
