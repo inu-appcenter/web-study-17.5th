@@ -1,0 +1,43 @@
+.TodoItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid #d3c1a5; /* 연한 갈색 */
+}
+
+.TodoItem input {
+  width: 20px;
+  accent-color: #8b5e34; /* 체크박스 갈색톤 */
+}
+
+.TodoItem .content {
+  flex: 1;
+  font-size: 16px;
+  color: #4a3220; /* 진한 갈색 */
+}
+
+.TodoItem .content.done {
+  text-decoration: line-through;
+  color: #a68a6d; /* 흐린 갈색 */
+}
+
+.TodoItem .date {
+  font-size: 14px;
+  color: #9c7b58; /* 연한 갈색 */
+}
+
+.TodoItem button {
+  cursor: pointer;
+  background: none;
+  color: #6b4226; /* 버튼 글씨도 갈색 */
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 8px;
+  transition: background 0.2s;
+}
+
+.TodoItem button:hover {
+  background: #f0e6da; /* hover 시 연한 베이지 배경 */
+}
