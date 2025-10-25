@@ -1,27 +1,32 @@
-import { useState } from 'react'
-import './App.css'
-import Header from './components/Header.tsx'
-import List from './components/List.tsx'
-import Editor from './components/Editor.tsx'
-import Footer from './components/Footer.tsx'
+import "./globals.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { ThemeContext } from "./context/ThemeContext";
+import TodoList from "./pages/TodoList";
+import DoneList from "./pages/DoneList";
 
-function App() {
+export default function App() {
+  const [isDark, setIsDark] = useState(() => localStorage.getItem("theme") === "dark");
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
+
   return (
-    <div className="p-4 mx-auto max-w-2xl border border-gray-300 rounded-xl my-12 shadow-lg">
-      <header className="mb-4">
-        <Header />
-      </header>
-
-      <main>
-        <Editor />
-        <List />
-      </main>
-
-      <footer>
-        <Footer />
-      </footer>
-    </div>
-  )
+    <ThemeContext.Provider value={{ isDark, setIsDark }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TodoList />} />
+          <Route path="/done" element={<DoneList />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeContext.Provider>
+  );
 }
-
-export default App
