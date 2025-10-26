@@ -1,58 +1,45 @@
-import "./List.css";
 import TodoItem from "./TodoItem";
 import { useState } from "react";
-
-type Todo = {
-  id: number;
-  isDone: boolean;
-  content: string;
-  date: number;
-};
+import { type Todo } from "../types/todo";
 
 type ListProps = {
   todos: Todo[];
-  onUpdate: (targetId: number) => void; //props로 타입
+  onUpdate: (targetId: number) => void;
   onDelete: (targetId: number) => void;
+  todoCount: number;
 };
 
-const List = ({ todos, onUpdate, onDelete }: ListProps) => {
+const List = ({ todos, onUpdate, onDelete, todoCount }: ListProps) => {
   const [search, setSearch] = useState("");
 
-  const onChangeSearch = (e: any) => {
-    setSearch(e.target.value);
-  };
-
-  const getFilteredData = () => {
-    if (search === "") {
-      return todos;
-    }
-    return todos.filter((todo) =>
-      todo.content.toLocaleLowerCase().includes(search.toLocaleLowerCase())
-    );
-    //연산이 참이 되는 것을 식별, 대소문자 구분 없애기 -> 모두 소문자로 인식
-  };
-
-  const filteredTodos = getFilteredData();
+  const filteredTodos =
+    search === ""
+      ? todos
+      : todos.filter((todo) =>
+          todo.content.toLowerCase().includes(search.toLowerCase())
+        );
 
   return (
-    <div className="List">
-      <h4> Todo List 🌿</h4>
+    <div className="flex flex-col gap-4">
+      <h4 className="text-lg font-semibold">Todo List 🌿</h4>
       <input
         value={search}
-        onChange={onChangeSearch}
+        onChange={(e) => setSearch(e.target.value)}
         placeholder="검색어를 입력하세요"
+        className="w-full border-none border-b border-white bg-transparent py-4 focus:outline-none focus:border-skyblue transition"
       />
-      <div className="todos_wrapper">
-        {filteredTodos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              {...todo}
-              onUpdate={onUpdate}
-              onDelete={onDelete}
-            />
-          ); //list 렌더링할때 key로 컴포넌트 구별
-        })}
+      <div className="flex flex-col gap-5">
+        {filteredTodos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            {...todo}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
+        ))}
+      </div>
+      <div className="mt-4 p-3 bg-beige text-brown-500 rounded test-center font-medium">
+        남은 할일: <span className="text-skyblue font-bold">{todoCount}</span>
       </div>
     </div>
   );
