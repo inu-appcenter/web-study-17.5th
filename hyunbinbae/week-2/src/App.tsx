@@ -1,68 +1,43 @@
-import { useState, useRef } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
-import "./App.css";
 import Header from "./components/Header";
 import List from "./components/List";
 import Editor from "./components/Editor";
+import DoneTodo from "./pages/DoneTodo"; // DoneTodo import 추가
+import { useState, useEffect } from "react";
+import { DarkModeProvider } from "./contexts/ThemeContext";
+import { type Category, type Todo } from "./types/todo";
 
-const mockData = [
-  {
-    id: 0,
-    isDone: false,
-    content: "React 공부하기",
-    date: new Date().getTime(),
-  },
-  {
-    id: 1,
-    isDone: false,
-    content: "영어공부하기",
-    date: new Date().getTime(),
-  },
-  {
-    id: 2,
-    isDone: false,
-    content: "스킨케어하기",
-    date: new Date().getTime(),
-  },
-];
+const LOCAL_STORAGE_KEY = "todos"; //로컬 스토리지 키
 
-type Todo = {
-  id: number;
-  isDone: boolean;
-  content: string;
-  date: number; // getTime() 결과는 number
+// 로컬 스토리지에서 데이터 불러오기
+const getLocalStorageData = (): Todo[] => {
+  const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return data ? JSON.parse(data) : [];
 };
 
 function App() {
-  const [todos, setTodos] = useState<Todo[]>([]); //JS와 달리 타입지정해야된다!
-  const idRef = useRef(3); //id 중복되지 않도록 지정하기
+  const [todos, setTodos] = useState<Todo[]>(getLocalStorageData);
 
-  const onCreate = (content: string) => {
+  const [currentPage, setCurrentPage] = useState<"home" | "done">("home"); //
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
+
+  //할 일 개수 표현 위해서 count 할 함수 만들기
+  const todoCount = todos.filter((todo) => !todo.isDone).length;
+
+  const onCreate = (content: string, category: Category) => {
     const newTodo: Todo = {
-      id: idRef.current++, //idRef 만들때마다 1씩 증가!
+      id: Date.now(), // 고유 ID로 현재시간 -> 시간이랑 상수 뭐가 좋을까...
       isDone: false,
-      content: content,
+      content,
       date: new Date().getTime(),
+      category,
     };
-
     setTodos([newTodo, ...todos]);
   };
 
-  // const onUpdate = (targetId: number) => {
-  //   //인수: todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
-  //   setTodos(
-  //     todos.map((todo) => {
-  //       if (todo.id === targetId) {
-  //         return { ...todo, isDone: !todo.isDone };
-  //       }
-  //       return todo;
-  //     })
-  //   );
-  // };
-
   const onUpdate = (targetId: number) => {
-    //인수: todos 배열에서 targetId와 일치하는 id를 갖는 요소의 데이터만 딱 바꾼 새로운 배열
     setTodos(
       todos.map((todo) =>
         todo.id === targetId ? { ...todo, isDone: !todo.isDone } : todo
@@ -74,12 +49,35 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== targetId));
   };
 
+  const pages = {
+    home: (
+      <>
+        <Editor onCreate={onCreate} />
+        <List
+          todos={todos}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+          todoCount={todoCount}
+        />
+      </>
+    ),
+    done: <DoneTodo todos={todos} onUpdate={onUpdate} onDelete={onDelete} />,
+  };
+
   return (
-    <div className="App">
-      <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
-    </div>
+    <DarkModeProvider>
+      <div
+        className="
+          w-[500px] mt-[70px] mx-auto flex flex-col gap-3 p-6 rounded-xl shadow-2xl transition-colors duration-300
+          bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-100
+        "
+      >
+        <Header currentPage={currentPage} onNavigate={setCurrentPage} />
+
+        {pages[currentPage]}
+        {/* 현재 페이지 불러오기 {pages[currentPage]} 맞나요..? 삼항 연산자에서 페이지 추가 생각해서 매핑으로 바꿈*/}
+      </div>
+    </DarkModeProvider>
   );
 }
 
