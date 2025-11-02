@@ -1,0 +1,15 @@
+.card-text {
+  width: auto;
+  text-align: left;
+  border-radius: 2%;
+}
+.dark-mode.card-text {
+  background-color: #1f1f1f;
+}
+.light-mode.card-text {
+  background-color: #e0e0e0;
+}
+.completed {
+  text-decoration: line-through;
+  font-style: italic;
+}
