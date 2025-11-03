@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  /* 브랜드 컬러 (기존 #7A83DE 계열) */
+  --color-brand-500: oklch(0.65 0.16 270);
+  /* 진한 보라 */
+  --color-brand-400: oklch(0.72 0.12 270);
+  --color-brand-300: oklch(0.8 0.08 270);
+
+  /* 배경·보조색 (기존 F0F9FF, EDE9FE 계열) */
+  --color-surface-100: oklch(0.97 0.02 250);
+  /* F0F9FF 비슷 */
+  --color-surface-200: oklch(0.94 0.03 280);
+  /* EDE9FE 비슷 */
+  --color-surface-300: oklch(0.91 0.04 280);
+
+  /* 중립 회색 계열 (텍스트, 테두리용) */
+  --color-gray-50: oklch(0.99 0.01 250);
+  --color-gray-100: oklch(0.96 0.01 250);
+  --color-gray-300: oklch(0.87 0.02 250);
+  --color-gray-500: oklch(0.67 0.03 250);
+  --color-gray-700: oklch(0.55 0.04 250);
+  --color-gray-900: oklch(0.35 0.04 250);
+
+  /* 성공/경고/에러 */
+  --color-success-500: oklch(0.72 0.13 150);
+  --color-warning-500: oklch(0.85 0.13 90);
+  --color-danger-500: oklch(0.65 0.2 25);
+
+  /* 폰트 */
+  --font-sans: "Pretendard Variable", "Noto Sans KR", sans-serif;
+}
+
+/* 전역 스타일 설정 */
+body {
+  font-family: var(--font-sans);
+  color: var(--color-gray-700);
+  background-color: var(--color-surface-100);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* header 텍스트 그라데이션 효과 */
+header h1 {
+  background: linear-gradient(to right,
+      var(--color-brand-300),
+      var(--color-brand-500));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* 입력창 placeholder 색상 */
+input::placeholder {
+  color: var(--color-gray-500);
+}
+
+/* 버튼 기본 transition */
+button {
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+/* hover 시 살짝 확대 효과 */
+button:hover {
+  transform: scale(1.03);
+}
+
+/* 완료된 todo 아이템 스타일 보강 */
+.line-through {
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-gray-300);
+}
+
+/* 🌙 다크모드 스타일 추가 */
+html.dark body {
+  color: var(--color-gray-100);
+  background-color: var(--color-gray-900);
+}
+
+html.dark input {
+  background-color: var(--color-gray-700);
+  color: var(--color-gray-50);
+}
+
+html.dark button {
+  background-color: var(--color-gray-700);
+  color: var(--color-gray-100);
+}
+
+.scrollbar-custom {
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: #555 transparent;
+  /* Firefox */
+}
+
+/* Chrome, Edge, Safari */
+.scrollbar-custom::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 8px;
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
