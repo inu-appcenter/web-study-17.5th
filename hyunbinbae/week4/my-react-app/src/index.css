@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand: #1db954;
+
+  --bg-base: #121212; /* 전체 배경 */
+  --bg-elev-1: #181818; /* 상단바/카드 */
+  --bg-elev-2: #242424; /* 사이드/입력창 */
+
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --border-subtle: #282828;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family:
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    "Noto Sans KR",
+    Arial,
+    sans-serif;
+}
+
+.container-app {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
