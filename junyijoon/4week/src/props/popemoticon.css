@@ -1,0 +1,32 @@
+.poprank {
+  width: 42px;
+  height: 100px;
+  padding: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fa4637;
+}
+.popart {
+  width: 294px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .product {
+    margin: 4px 0 0 0;
+  }
+  .author {
+    color: #999999;
+  }
+}
+
+.popimg {
+  width: 76px;
+  height: 76px;
+}
+.popemot_link {
+  padding: 0 0 0 20px;
+}
