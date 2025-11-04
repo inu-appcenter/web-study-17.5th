@@ -57,23 +57,103 @@ function Content() {
         </ol>
       </div>
       <div className="emoticonintrostyle">
-        <h3 className="style">
-          <a href="https://e.kakao.com/item/hot">스타일</a>
-          <img src={ref}></img>
-        </h3>
-        <div className="styleemote">
-          <div className="style_link">
-            <strong className="tag">#행복해요</strong>
-            <span className="round_box">#날치에요</span>
+        <div className="styleemoticon">
+          <h3 className="style">
+            <a href="https://e.kakao.com/item/hot">스타일</a>
+            <img src={ref}></img>
+          </h3>
+          <div className="styleemote">
+            <div className="style_link">
+              <strong className="tag">#행복해요</strong>
+              <span className="round_box">#날치에요</span>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
           </div>
-          <div className="style_emote_list">
-            <a className="style_emote_link">
-              <img className="style_img" src={RkajrdjTdjdy} />
-              <img className="style_img" src={RkajrdjTdjdy} />
-              <img className="style_img" src={RkajrdjTdjdy} />
-              <img className="style_img" src={RkajrdjTdjdy} />
-              <img className="style_img" src={RkajrdjTdjdy} />
-            </a>
+          <div className="styleemote">
+            <div className="style_link">
+              <strong className="tag">#행복해요</strong>
+              <span className="round_box">#날치에요</span>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+          </div>
+          <div className="styleemote">
+            <div className="style_link">
+              <strong className="tag">#행복해요</strong>
+              <span className="round_box">#날치에요</span>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
+            <div className="style_emote_list">
+              <a className="style_emote_link">
+                <img className="style_img" src={RkajrdjTdjdy} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
