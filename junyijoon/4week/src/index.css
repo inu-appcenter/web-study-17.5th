@@ -1,0 +1,25 @@
+@import "tailwindcss";
+.root {
+  background-color: black;
+}
+a::after {
+  content: "";
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+}
+h3 {
+  width: 944px;
+  height: 56px;
+  font-size: 24px;
+  font-style: bold;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+h3 img {
+  width: 15px;
+  height: 15px;
+}
