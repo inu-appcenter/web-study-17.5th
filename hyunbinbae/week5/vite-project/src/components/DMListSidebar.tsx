@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Avatar from "./Avatar";
 import { CHATS, ME, USERS, formatTimeAgo } from "../mock";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,10 +9,11 @@ export default function DMListSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const chats = useMemo(() => CHATS, []);
+  const chats = CHATS;
 
   const filtered = chats.filter((c) => {
-    const friendId = c.participantIds.find((id) => id !== ME.id)!;
+    const friendId = c.participantIds.find((id) => id !== ME.id);
+    if (!friendId) return null;
     const friend = USERS[friendId];
     const key = (friend.name + friend.handle).toLowerCase();
     return key.includes(q.toLowerCase());
