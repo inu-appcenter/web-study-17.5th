@@ -1,4 +1,3 @@
-// src/components/ChatBubble.tsx
 import type { Message } from "../mock";
 import { MoreHorizontal, Heart } from "lucide-react";
 
@@ -16,7 +15,7 @@ export default function ChatBubble({
       <div
         className={`flex items-center gap-2 ${isMine ? "flex-row-reverse" : "flex-row"}`}
       >
-        {/* 마우스 오버 시 나타나는 영역 */}
+        {/* 호버 시 나타나는 영역 */}
         <div
           className={`text-white/70 flex transition-opacity duration-200 opacity-0 group-hover:opacity-100 ${isMine ? "" : ""}`}
         >
@@ -31,7 +30,6 @@ export default function ChatBubble({
         <div
           className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm relative ${isMine ? "bg-[#3797F0] text-white rounded-br-sm" : "bg-white/10 text-white rounded-bl-sm"}`}
         >
-          {/* //{msg.text && <p className="">{msg.text}</p>} */}
           <div
             className={`mt-1 text-[10px] ${isMine ? "text-white/70" : "text-white/50"}`}
           >

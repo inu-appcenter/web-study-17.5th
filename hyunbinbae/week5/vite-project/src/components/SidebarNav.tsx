@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 // 아이콘의 SVG Path
 const ICON_PATHS: Record<string, string> = {
@@ -24,15 +25,13 @@ const ICON_PATHS: Record<string, string> = {
 const CustomSvgIcon = ({
   iconKey,
   size,
-  isActive,
+  //isActive,
 }: {
   iconKey: string;
   size: number;
   isActive?: boolean;
 }) => {
   const path = ICON_PATHS[iconKey];
-  const isHome = iconKey === "Home";
-  const isLogo = iconKey === "InstagramLogo";
 
   if (!path) return null;
 
@@ -55,7 +54,7 @@ const CustomSvgIcon = ({
 const NavItem = ({
   iconKey,
   text,
-  isActive,
+  isActive, // isActive prop 사용
   isExpanded,
 }: {
   iconKey: string;
@@ -78,22 +77,26 @@ const NavItem = ({
 );
 
 export default function SidebarNav() {
-  const [isExpanded, setIsExpanded] = useState(false); // 초기 상태는 축소
+  const [isExpanded, setIsExpanded] = useState(false);
+  const location = useLocation(); // 현재 경로를 가져오기 위해 useLocation 사용
 
   const handleMouseEnter = () => setIsExpanded(true);
   const handleMouseLeave = () => setIsExpanded(false);
 
-  // navItems 배열: iconKey 사용
+  // navItems 배열: path만 남기고, isActive는 false로 설정
   const navItems = [
-    { iconKey: "Home", text: "홈", isActive: false },
-    { iconKey: "Search", text: "검색", isActive: false },
-    { iconKey: "Compass", text: "탐색 탭", isActive: false },
-    { iconKey: "Video", text: "릴스", isActive: false },
-    { iconKey: "MessageSquare", text: "메시지", isActive: true }, // 여기에 활성화 상태
-    { iconKey: "Heart", text: "알림", isActive: false },
-    { iconKey: "PlusSquare", text: "만들기", isActive: false },
-    { iconKey: "User", text: "프로필", isActive: false },
+    { iconKey: "Home", text: "홈", path: "/" },
+    { iconKey: "Search", text: "검색", path: "/search" },
+    { iconKey: "Compass", text: "탐색 탭", path: "/explore" },
+    { iconKey: "Video", text: "릴스", path: "/reels" },
+    { iconKey: "MessageSquare", text: "메시지", path: "/dm" }, // path만 남김
+    { iconKey: "Heart", text: "알림", path: "/notifications" },
+    { iconKey: "PlusSquare", text: "만들기", path: "/create" },
+    { iconKey: "User", text: "프로필", path: "/profile" },
   ];
+
+  // 현재 경로가 /dm 또는 /dm/:chatId 일 때 메시지가 활성화
+  const isMessageActive = location.pathname.startsWith("/dm");
 
   return (
     <nav
@@ -107,7 +110,6 @@ export default function SidebarNav() {
         {isExpanded ? (
           <h1 className="text-2xl font-serif italic font-bold">Instagram</h1>
         ) : (
-          // 로고도 CustomSvgIcon 사용
           <CustomSvgIcon iconKey="InstagramLogo" size={28} />
         )}
       </div>
@@ -118,7 +120,8 @@ export default function SidebarNav() {
             key={item.text}
             iconKey={item.iconKey} // key 전달
             text={item.text}
-            isActive={item.isActive}
+            // '메시지' 항목일 때만 계산된 isMessageActive 값을 전달
+            isActive={item.path === "/dm" ? isMessageActive : false}
             isExpanded={isExpanded}
           />
         ))}
@@ -127,11 +130,17 @@ export default function SidebarNav() {
       <div
         className={`mt-auto pt-4 border-t border-white/10 ${isExpanded ? "px-2" : "flex justify-center flex-col w-full items-center"}`}
       >
-        <NavItem iconKey="Menu" text="더 보기" isExpanded={isExpanded} />
+        <NavItem
+          iconKey="Menu"
+          text="더 보기"
+          isExpanded={isExpanded}
+          isActive={false}
+        />
         <NavItem
           iconKey="MetaApp"
           text="Meta의 다른 앱"
           isExpanded={isExpanded}
+          isActive={false}
         />
       </div>
     </nav>
