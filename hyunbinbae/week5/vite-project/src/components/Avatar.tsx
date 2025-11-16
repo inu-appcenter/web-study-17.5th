@@ -1,3 +1,4 @@
+/// 프로필 여기서 미리
 export default function Avatar({
   src,
   size = 40,
