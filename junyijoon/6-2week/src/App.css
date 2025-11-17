@@ -1,0 +1,10 @@
+.frameBox {
+  width: 960px;
+  height: auto;
+  background-color: black;
+  color: green;
+}
+.spotImg {
+  width: 30%;
+  height: 30%;
+}
