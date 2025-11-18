@@ -66,9 +66,9 @@ export default function PlaceListPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div className="min-h-screen" style={{ background: "linear-gradient(to bottom, #FFF7F9 0%, #FFE6EE 100%)" }}>
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold">장소 목록</h2>
+        <h2 className="text-2xl font-bold mt-2 ml-74 text-gray-800">장소 목록</h2>
         <LogoutButton />
       </div>
 
@@ -76,28 +76,55 @@ export default function PlaceListPage() {
       <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
 
       {/* 장소 목록 */}
-      <div className="grid grid-cols-1 gap-4">
-        {filtered.map((place: any) => (
-          <div
-            key={place.id}
-            className="bg-white rounded-xl shadow p-4 border cursor-pointer hover:bg-gray-50"
-            onClick={() => navigate(`/places/${place.id}`)}
-          >
-            <h3 className="text-lg font-bold">{place.name}</h3>
-            <p className="text-sm text-gray-600">{place.locationDetail}</p>
+      {(() => {
+        const rows: any[] = [];
+        for (let i = 0; i < filtered.length; i += 5) {
+          rows.push(filtered.slice(i, i + 5));
+        }
 
-            {place.photo && (
-              <img
-                src={place.photo}
-                alt="place"
-                className="w-full h-40 object-cover rounded-lg mt-2"
-              />
-            )}
+        return (
+          <div className="w-full flex flex-col items-center gap-6">
 
-            <p className="mt-2 text-sm">{place.description}</p>
+            {rows.map((row, rowIndex) => (
+              <div key={rowIndex} className="flex justify-center gap-4 group mb-8">
+
+                {row.map((place: any, idx: number) => {
+                  const isFirst = idx === 0;
+
+                  return (
+                    <div
+                      key={place.id}
+                      className={`
+                  relative overflow-hidden cursor-pointer shadow
+                  transition-all duration-300 ease-out h-[330px]
+                  ${isFirst ? "w-[422px]" : "w-[152px]"}
+                  group-hover:w-[152px]
+                  hover:w-[422px]
+                `}
+                      onClick={() => navigate(`/places/${place.id}`)}
+                    >
+                      <img
+                        src={place.photo}
+                        className="w-full h-full object-cover"
+                      />
+
+                      <div className="absolute bottom-0 left-0 w-full px-3 py-2">
+                        <p className="text-white font-bold text-sm">
+                          {place.name}
+                        </p>
+                        <p className="text-white text-xs">
+                          {place.locationDetail}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        );
+      })()}
     </div>
   );
 }
