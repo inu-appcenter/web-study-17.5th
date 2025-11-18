@@ -34,8 +34,6 @@ export default function LoginPage() {
         },
       });
 
-      console.log("LOGIN RESPONSE:", res.data);
-
       const statusCode = Number(res.data.status);
 
       if (statusCode === 200) {
