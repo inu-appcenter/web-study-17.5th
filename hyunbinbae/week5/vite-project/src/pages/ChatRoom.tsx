@@ -1,40 +1,34 @@
-import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChatHeader from "../components/ChatHeader";
 import ChatBubble from "../components/ChatBubble";
 import MessageInput from "../components/MessageInput";
-import { CHATS, INITIAL_MESSAGES, ME, USERS } from "../mock";
-import type { Message } from "../mock";
+import { CHATS, ME, USERS } from "../mock";
+import { useChatContext } from "../context/ChatContext";
 
 export default function ChatRoom() {
-  const { chatId } = useParams(); // URL에서 /dm/:chatId 값 추출
-  const [messages, setMessages] = useState<Message[]>([]);
+  const { chatId } = useParams();
 
-  useEffect(() => {
-    if (!chatId) return;
-    setMessages(INITIAL_MESSAGES[chatId] ?? []);
-  }, [chatId]);
+  const { sendMessage, getChatMessages } = useChatContext();
 
-  const friendId = useMemo(() => {
-    return CHATS.find((c) => c.id === chatId)?.participantIds.find(
-      (id) => id !== ME.id
-    );
-  }, [chatId]);
+  if (!chatId) return null;
 
+  const messages = getChatMessages(chatId);
+
+  // currentChat 찾기
+  const currentChat = CHATS.find((chat) => chat.id === chatId);
+  if (!currentChat) return null;
+
+  // friendId 찾기
+  const friendId = currentChat.participantIds.find(
+    (participantId) => participantId !== ME.id
+  );
   if (!friendId) return null;
+
   const friend = USERS[friendId];
 
+  // onSend 함수는 useChatContext의 sendMessage를 사용
   const onSend = (text: string) => {
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: crypto.randomUUID(),
-        chatId: chatId!,
-        senderId: ME.id,
-        text,
-        createdAt: new Date().toISOString(),
-      },
-    ]);
+    sendMessage(chatId, text);
   };
 
   return (

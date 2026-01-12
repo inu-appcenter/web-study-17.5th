@@ -60,26 +60,29 @@ export const USERS: Record<string, User> = {
   },
 };
 
+const minutesAgo = (m: number) =>
+  new Date(Date.now() - m * 60_000).toISOString();
+
 export const CHATS: Chat[] = [
   {
     id: "c1",
     participantIds: ["me", "u1"],
-    lastMessageAt: new Date().toISOString(),
+    lastMessageAt: minutesAgo(50), // minutesAgo 헬퍼 함수 사용
   },
   {
     id: "c2",
     participantIds: ["me", "u2"],
-    lastMessageAt: new Date(Date.now() - 3600_000).toISOString(),
+    lastMessageAt: minutesAgo(60), // minutesAgo 헬퍼 함수 사용
   },
   {
     id: "c3",
     participantIds: ["me", "u3"],
-    lastMessageAt: new Date(Date.now() - 2 * 3600_000).toISOString(),
+    lastMessageAt: minutesAgo(120), // minutesAgo 헬퍼 함수 사용
   },
   {
     id: "c4",
     participantIds: ["me", "u4"],
-    lastMessageAt: new Date(Date.now() - 3 * 3600_000).toISOString(),
+    lastMessageAt: minutesAgo(180), // minutesAgo 헬퍼 함수 사용
   },
 ];
 
@@ -90,14 +93,14 @@ export const INITIAL_MESSAGES: Record<string, Message[]> = {
       chatId: "c1",
       senderId: "u1",
       text: "Test Text 메세지입니당",
-      createdAt: new Date(Date.now() - 50 * 60_000).toISOString(),
+      createdAt: minutesAgo(50), // minutesAgo 헬퍼 함수 사용
     },
     {
       id: "m2",
       chatId: "c1",
       senderId: "me",
       text: "Hi:)",
-      createdAt: new Date(Date.now() - 40 * 60_000).toISOString(),
+      createdAt: minutesAgo(40), // minutesAgo 헬퍼 함수 사용
     },
   ],
   c2: [
@@ -106,7 +109,7 @@ export const INITIAL_MESSAGES: Record<string, Message[]> = {
       chatId: "c2",
       senderId: "u2",
       text: "user2 가 보낸 메세지",
-      createdAt: new Date(Date.now() - 90 * 60_000).toISOString(),
+      createdAt: minutesAgo(90), // minutesAgo 헬퍼 함수 사용
     },
   ],
   c3: [],
@@ -115,7 +118,11 @@ export const INITIAL_MESSAGES: Record<string, Message[]> = {
 
 export function formatTimeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
-  const m = Math.round(diff / 60000);
-  if (m < 1) return "지금";
-  if (m < 60) return `${m}분`;
+  const minutes = Math.round(diff / 60000);
+  if (minutes < 1) return "지금";
+  if (minutes < 60) return `${minutes}분 전`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}시간 전`;
+  const days = Math.floor(hours / 24);
+  return `${days}일 전`;
 }
