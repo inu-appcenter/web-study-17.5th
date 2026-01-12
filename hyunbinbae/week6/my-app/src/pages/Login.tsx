@@ -61,45 +61,6 @@ const Loginpages = () => {
     }
   };
 
-  const handleDelete = async () => {
-    const accessToken = localStorage.getItem("accessToken");
-
-    if (!accessToken) {
-      alert("로그인 정보가 없습니다.");
-      return;
-    }
-
-    if (!window.confirm("회원 탈퇴를 하시겠습니까?")) {
-      return;
-    }
-
-    try {
-      // API 문서 기반 DELETE 요청
-      const response = await fetch(`${baseURL}/api/v1/auth/delete`, {
-        method: "DELETE",
-        headers: {
-          // 인증 토큰 필요
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("서버 응답:", errorText);
-        throw new Error("회원 탈퇴에 실패");
-      }
-
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("name");
-
-      alert("회원 탈퇴가 완료");
-      navigate("/login"); // 로그인 페이지로 리디렉션
-    } catch (error) {
-      alert((error as Error).message);
-    }
-  };
-
   return (
     <div className="min-h-screen w-full bg-[#FAFAFA] flex flex-col items-center justify-center py-24 px-8 gap-24">
       <div className="w-full max-w-md space-y-6">
