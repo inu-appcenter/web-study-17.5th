@@ -1,0 +1,19 @@
+<!-- star-outline.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <path
+    d="M32 6 
+       L39.6 24.2 
+       L59 24.2 
+       L43.2 35.6 
+       L49.4 54 
+       L32 42.8 
+       L14.6 54 
+       L20.8 35.6 
+       L5 24.2 
+       L24.4 24.2 
+       Z"
+    stroke="#06DF73"
+    stroke-width="4"
+    stroke-linejoin="round"
+    fill="none"/>
+</svg>

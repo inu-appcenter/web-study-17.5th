@@ -1,0 +1,7 @@
+<!-- reset-location.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Arrow / navigation outline -->
+    <path d="M32 6 L54 50 L32 38 L10 50 Z" />
+  </g>
+</svg>

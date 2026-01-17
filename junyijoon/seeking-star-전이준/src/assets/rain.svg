@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
+  <g stroke="#5B7EA5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- cloud -->
+    <path d="M22 36H45c6.5 0 11-4.4 11-10.2 0-5.4-4.1-9.7-9.6-10.1C44.2 8.5 38.7 4 32 4c-7.2 0-13.2 5.2-14.3 12.1C12.6 17.5 9 21.3 9 26c0 5.5 4.6 10 13 10Z"/>
+    <!-- drops -->
+    <path d="M22 44 L22 56"/>
+    <path d="M32 44 L32 60"/>
+    <path d="M42 44 L42 56"/>
+  </g>
+</svg>
